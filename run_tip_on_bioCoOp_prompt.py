@@ -194,7 +194,7 @@ def setup_cfg(args):
     # 4. From optional input arguments
     cfg.merge_from_list(args.opts)
 
-    # cfg.freeze()
+    cfg.freeze()
 
     return cfg
 
@@ -382,7 +382,7 @@ if __name__ == "__main__":
     # parser.add_argument(
     #     '--dataset_config', default='configs/caltech101.yaml',
     #     help='dataset config')
-    parser.add_argument('--opts', default=None, nargs=argparse.REMAINDER)
+    # parser.add_argument('--opts', default=None, nargs=argparse.REMAINDER)
     # args = parser.parse_args()
     # cfg = load_cfg_from_cfg_file(args.base_config)
     # cfg.update(load_cfg_from_cfg_file(args.dataset_config))
