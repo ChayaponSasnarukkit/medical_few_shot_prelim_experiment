@@ -21,7 +21,7 @@ FEW_SHOT_CONFIG_SHOTS = [1, 2, 4, 8, 16]
 ALL_TRAINERS = ["BiomedCoOp_BiomedCLIP"] # Example, can be ["TrainerA", "TrainerB"]
 
 # Define seeds
-ALL_SEEDS = [1, 2, 3]
+ALL_SEEDS = [1]
 
 # Constants from your original script for path construction
 NCTX_CSC_CTP_SUFFIX = "nctx4_cscFalse_ctpend"

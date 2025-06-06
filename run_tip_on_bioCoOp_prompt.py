@@ -247,7 +247,6 @@ def get_text_features_from_dassl_trainer(dassl_trainer) -> torch.Tensor:
         # Expected shape: (number_of_classes, feature_dimension)
         text_features = text_encoder(
             prompt_embeddings,
-            True, # This flag indicates `prompt_embeddings` are indeed embeddings
             original_tokenized_prompts_for_encoder
         )
 
@@ -275,14 +274,15 @@ def main(args):
     biomedcoop_trainer = build_trainer(coop_cfg)
     print("Trainer built successfully.")
     biomedcoop_trainer.load_model(args.model_dir, epoch=args.load_epoch)
+    biomedcoop_trainer.test()
     # text_features will be used as text_weight for tip
-    text_features = get_text_features_from_dassl_trainer(biomedcoop_trainer)
+    text_features = get_text_features_from_dassl_trainer(biomedcoop_trainer).T
 
     # ============== END of CoOp ===================== #
     tip_cfg = load_cfg_from_cfg_file(args.base_config)
     tip_cfg.update(load_cfg_from_cfg_file(args.dataset_config_file))
     if args.opts is not None:
-        tip_cfg = merge_cfg_from_list(tip_cfg, args.opts)
+        tip_cfg = merge_cfg_from_list(tip_cfg, args.opts_tip)
 
     cache_dir = os.path.join('./caches', tip_cfg.DATASET.NAME)
     os.makedirs(cache_dir, exist_ok=True)
@@ -382,7 +382,7 @@ if __name__ == "__main__":
     # parser.add_argument(
     #     '--dataset_config', default='configs/caltech101.yaml',
     #     help='dataset config')
-    # parser.add_argument('--opts', default=None, nargs=argparse.REMAINDER)
+    parser.add_argument('--opts_tip', default=None, nargs="+")
     # args = parser.parse_args()
     # cfg = load_cfg_from_cfg_file(args.base_config)
     # cfg.update(load_cfg_from_cfg_file(args.dataset_config))

@@ -14,3 +14,4 @@ from .LP.linear_probe_clip import *
 from .LP.linear_probe_biomedclip import *
 from .LP.linear_probe_pubmedclip import *
 from .LP.linear_probe_pmcclip import *
+from .TipX.tip_x_biomedclip import *
